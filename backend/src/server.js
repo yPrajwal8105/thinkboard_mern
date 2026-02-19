@@ -35,7 +35,7 @@ app.use(rateLimiter);
 
 app.use("/api/notes", notesRoutes);
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "development") {
   // Serve static assets from frontend build (project root -> frontend/dist)
   app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
