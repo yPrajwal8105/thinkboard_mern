@@ -35,12 +35,14 @@ app.use(rateLimiter);
 
 app.use("/api/notes", notesRoutes);
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "production") {
   // Serve static assets from frontend build (project root -> frontend/dist)
-  app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
+  const distPath = path.join(__dirname, "../../frontend", "dist");
+  console.log("Serving static files from:", distPath);
+  app.use(express.static(distPath));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    res.sendFile(path.join(distPath, "index.html"));
   });
 }
 
